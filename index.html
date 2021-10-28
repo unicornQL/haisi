@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <meta  name ="viewport" content ="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
+
+
+    <title>海丝之路</title>
+
+    <script type="text/javascript">
+    	
+   		document.addEventListener('plusready', function(){
+   			//console.log("所有plus api都应该在此事件发生后调用，否则会出现plus is undefined。"
+   			
+   		});
+   		
+    </script>
+</head>
+<body>
+	<script src="js/pixi.min.js"></script>
+    <script>
+    	//添加图片
+    	//var x=window.screen.width;
+    	//var y=window.screen.height;
+    	//var app = new PIXI.Application(x,y);
+
+
+
+		var app = new PIXI.Application(1080/3,2240/3);
+        document.body.appendChild(app.view);
+        
+        var bg = new PIXI.Sprite.fromImage("img/changeback.png");
+        app.stage.addChild(bg);
+        //bg.scale.x=0.8;
+        //bg.scale.y=0.8;
+        bg.width=1080/3;
+        bg.height=2105/3;
+        
+        /*bg.visible = true;
+        
+        bg.interactive = true;
+        bg.on("click", see);
+        function see(){
+        	bg.visible = false;
+        }*/
+        var hua = new PIXI.Sprite.fromImage("img/hua.png");
+        app.stage.addChild(hua);
+        hua.scale.x=0.03;
+        hua.scale.y=0.03;
+        hua.anchor.set(0.5,0.5);
+        hua.x=200/3;
+        hua.y=2040/3;
+        hua.alpha=0.5;
+        
+        var jinli = new PIXI.Sprite.fromImage("img/jinli.png");
+        app.stage.addChild(jinli);
+        jinli.scale.x=0.03;
+        jinli.scale.y=0.03;
+        jinli.anchor.set(0.5,0.5);
+        jinli.y=2040/3;
+        jinli.x=580/3;
+        
+        var xiangyun = new PIXI.Sprite.fromImage("img/xiangyun.png");
+        app.stage.addChild(xiangyun);
+        xiangyun.scale.x=0.04;
+        xiangyun.scale.y=0.04;
+        xiangyun.anchor.set(0.5,0.5);
+        xiangyun.y=2040/3;
+        xiangyun.x=890/3;
+        xiangyun.alpha=0.5;
+        
+        var xianhe = new PIXI.Sprite.fromImage("img/xianhe.png");
+        app.stage.addChild(xianhe);
+        xianhe.scale.x=0.08;
+        xianhe.scale.y=0.08;
+        xianhe.anchor.set(0.5,0.5);
+        xianhe.y=2040;
+        xianhe.x=810;
+        xianhe.visible = false;
+        
+        var tuan = new PIXI.Sprite.fromImage("img/tuan.png");
+        app.stage.addChild(tuan);
+        tuan.y=2100/3;
+        tuan.height=140/3;
+        tuan.width=540/3;
+        tuan.alpha=0.5;
+        
+        var dise = new PIXI.Sprite.fromImage("img/dise.png");
+        app.stage.addChild(dise);
+        dise.y=2100/3;
+        dise.x=540/3;
+        dise.height=140/3;
+        dise.width=540/3;
+        dise.alpha=0.5;
+        
+        //底栏
+        var a=0;
+        tuan.interactive = true;
+        dise.interactive=true;
+        tuan.on("touchstart", xuantu);
+        function xuantu(){
+        	a=1;
+        	if(a==1){
+        		tuan.alpha=1;
+        		dise.alpha=0.5;
+        	}
+        }
+        dise.on("touchstart", xuanse);
+        function xuanse(){
+        	a=2;
+        	if(a==2){
+        		dise.alpha=1;
+        		tuan.alpha=0.5;
+        	}
+        }
+        
+        //选择图案
+        
+        
+        
+    </script>	
+</body>
+</html>

@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <meta  name ="viewport" content ="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
+
+
+    <title>海丝之路</title>
+
+    <script type="text/javascript">
+     
+    
+     
+    </script>
+</head>
+<body>
+ <script src="js/pixi.min.js"></script>
+    <script>
+     //添加界面
+        var app = new PIXI.Application(1080/3,2240/3);
+        document.body.appendChild(app.view);
+        
+        //开始界面
+        
+        
+        var kaishi = new PIXI.Sprite.fromImage("img/kaishi.png");
+        app.stage.addChild(kaishi);
+        kaishi.width = 1080/3;
+        kaishi.height = 2240/3;
+        kaishi.visible = true;
+        
+        var bg = new PIXI.Sprite.fromImage("img/changeback.png");
+        app.stage.addChild(bg);
+        bg.width=1080/3;
+        bg.height=2240/3;
+        bg.visible = false;
+        
+        var hua = new PIXI.Sprite.fromImage("img/hua.png");
+        app.stage.addChild(hua);
+        hua.scale.x=0.025;
+        hua.scale.y=0.025;
+        hua.anchor.set(0.5,0.5);
+        hua.x=540/3;
+        hua.y=1940/3;
+        hua.alpha=1;
+        hua.visible = false;
+        
+        var jinli = new PIXI.Sprite.fromImage("img/jinli.png");
+        app.stage.addChild(jinli);
+        jinli.scale.x=0.03;
+        jinli.scale.y=0.03;
+        jinli.anchor.set(0.5,0.5);
+        jinli.y=1940/3;
+        jinli.x=820/3;
+        jinli.alpha = 1;
+        jinli.visible = false;
+        
+        var xiangyun = new PIXI.Sprite.fromImage("img/xiangyun.png");
+        app.stage.addChild(xiangyun);
+        xiangyun.scale.x=0.035;
+        xiangyun.scale.y=0.035;
+        xiangyun.anchor.set(0.5,0.5);
+        xiangyun.y=1940/3;
+        xiangyun.x=1100/3;
+        xiangyun.alpha=1;
+        xiangyun.visible = false;
+        
+        var xianhe = new PIXI.Sprite.fromImage("img/xianhe.png");
+        app.stage.addChild(xianhe);
+        xianhe.scale.x=0.04;
+        xianhe.scale.y=0.04;
+        xianhe.anchor.set(0.5,0.5);
+        xianhe.y=1940/3;
+        xianhe.x=1380/3;
+        //xianhe.visible = false;
+        xianhe.alpha = 1;
+        
+        var tuan = new PIXI.Sprite.fromImage("img/tuan.png");
+        app.stage.addChild(tuan);
+        tuan.y=2105/3;
+        tuan.height=135/3;
+        tuan.width=540/3;
+        tuan.visible = false;
+        
+        var dise = new PIXI.Sprite.fromImage("img/dise.png");
+        app.stage.addChild(dise);
+        dise.y=2105/3;
+        dise.x=540/3;
+        dise.height=135/3;
+        dise.width=540/3;
+        dise.alpha=0.5;
+        dise.visible = false;
+        
+        var left = new PIXI.Sprite.fromImage("img/left.png");
+        app.stage.addChild(left);
+        left.y=1850/3;
+        dise.x=540/3;
+        left.scale.x=0.3;
+        left.scale.y=0.3;
+        left.alpha=0.3;
+        left.visible = false;
+        
+        var right = new PIXI.Sprite.fromImage("img/right.png");
+        app.stage.addChild(right);
+        right.y=1850/3;
+        right.x=870/3;
+        right.scale.x=0.3;
+        right.scale.y=0.3;
+        right.alpha=0.3;
+        right.visible = false;
+        
+        /*var back = new PIXI.Sprite.fromImage("img/back.png");
+        app.stage.addChild(back);
+        back.scale.x=0.08;
+        back.scale.y=0.08;
+        back.y=80/3;
+		back.x=60/3;
+		back.visible  = false;
+        
+        var finish = new PIXI.Sprite.fromImage("img/finish.png");
+        app.stage.addChild(finish);
+        finish.scale.x=0.08;
+        finish.scale.y=0.08;
+        finish.y=80/3;
+        finish.x=830/3;
+        finish.visible = false;*/
+        
+        var chose = new PIXI.Text("滑动选择主题元素，展现不同纹饰");
+        bg.addChild(chose);
+        chose.x = 150;
+        chose.y = 1660;
+        chose.scale.x = 2;
+        chose.scale.y = 2;
+        chose.style.fontWeight = "bold";
+        chose.style.fontFamily = "隶书";
+        chose.visible = false;
+        
+        var xuantuan = new PIXI.Text("选图案");
+        tuan.addChild(xuantuan);
+        xuantuan.x = 150;
+        xuantuan.y = 40;
+        xuantuan.scale.x = 3;
+        xuantuan.scale.y = 3;
+        xuantuan.style.fontWeight = "bold";
+        xuantuan.style.fontFamily = "隶书";
+        xuantuan.visible = false;
+        
+        var xuandise = new PIXI.Text("选底色");
+        dise.addChild(xuandise);
+        xuandise.x = 150;
+        xuandise.y = 40;
+        xuandise.scale.x = 3;
+        xuandise.scale.y = 3;
+        xuandise.style.fontWeight = "bold";
+        xuandise.style.fontFamily = "隶书";
+        xuandise.visible = false;
+        
+        var b = 0;
+        kaishi.interactive = true;
+        kaishi.on("touchstart",huan);
+        function huan(){
+        	kaishi.visible = false;
+        	b=1; 
+        	if(b == 1){
+        		bg.visible = true;
+        		hua.visible = true;
+        		jinli.visible = true;
+        		xiangyun.visible = true;
+        		//xianhe.visible = true;
+        		tuan.visible = true;
+        		dise.visible = true;
+        		//back.visible = true;
+        		//visible = true;
+        		chose.visible = true;
+        		xuantuan.visible = true;
+        		xuandise.visible = true;
+        		left.visible = true;
+        		right.visible = true;
+			}
+        }
+		
+		//切换
+		var center=0;
+		var speed=1;
+		
+		app.ticker.add(animate);
+		function animate(){
+			jinli.x+=280/15*speed;
+        	hua.x+=280/15*speed;
+        		//hua.visible = false;
+        	xiangyun.x+=280/15*speed;
+        	xianhe.visible= true;
+        	xianhe.x+=280/15*speed;
+        	
+        	/*if(xianhe.x<=1100/3){
+        		hua.x=260/3;
+        		jinli.x=540/3;
+        		xiangyun.x=820/3;
+        		xianhe.x=1100/3;
+        	}
+        	
+        	if(xianhe.x<=820){
+        		hua.x=-20/3;
+        		jinli.x=260/3;
+        		xiangyun.x=540/3;
+        		xianhe.x=820/3;
+        	}*/
+        	
+        	if(xianhe.x<=540/3){
+        			hua.x=-390/3;
+        			jinli.x=-20/3;
+        			xiangyun.x=260/3;
+        			xianhe.x=540/3;
+        			center=3;
+        			//big();
+        	}
+        	
+        	/*if(xiangyun.x<=540/3){
+        			hua.x=-20/3;
+        			jinli.x=260/3;
+        			xiangyun.x=540/3;
+        			xianhe.x=820/3;
+        			
+        	}
+        	
+        	if(jinli.x<=540/3){
+        			hua.x=260/3;
+        			jinli.x=540/3;
+        			xiangyun.x=820/3;
+        			xianhe.x=1100/3;
+        			
+        	}*/
+				
+			if(hua.x>=540/3){
+        		hua.x=540/3;
+        		jinli.x=820/3;
+        		xiangyun.x=1100/3;
+        		xianhe.x=1280/3;
+        		center=4;
+        		//big();
+        		//xianhe.visible = false;
+        	}
+			
+			/*if(hua.x>=260){
+				hua.x=260/3;
+        		jinli.x=540/3;
+        		xiangyun.x=820/3;
+        		xianhe.x=1100/3;
+			}
+			
+			if(hua.x>=-20){
+				hua.x=-20/3;
+        		jinli.x=260/3;
+        		xiangyun.x=540/3;
+        		xianhe.x=820/3;
+			}*/
+		}
+		
+		/*function big(){
+			if(center==1){
+				jinli.scale.x=0.045;
+				jinli.scale.y=0.045;
+				jinli.alpha=1;
+				center=0;
+			}
+			if(center==2){
+				xiangyun.scale.x=0.05;
+				xiangyun.scale.y=0.05;
+				xiangyun.alpha=1;
+				center=0;
+			}
+			if(center==3){
+				xianhe.scale.x=0.06;
+				xianhe.scale.y=0.06;
+				xianhe.alpha=1;
+				center=0;
+			}
+			if(center==4){
+				hua.scale.x=0.035;
+				hua.scale.y=0.035;
+				hua.alpha=1;
+				center=0;
+			}
+		}*/
+		
+		//big();
+		
+		left.interactive = true;
+		left.on("touchstart", move1);
+		function move1(){
+			if(speed==1)
+        		speed=-1;
+		}
+		
+		right.interactive = true;
+		right.on("touchstart", move2);
+		function move2(){
+			if(speed==-1){
+				speed=1;
+			}
+		}
+		
+		/*function movetuan(){
+			move1();
+			move2();
+			//if(num==0){
+				
+		}*/
+		
+		
+		//底栏
+		var a=0;
+        tuan.interactive = true;
+        dise.interactive=true;
+        tuan.on("touchstart", xuantu);
+        function xuantu(){
+        	a=1;
+        	if(a==1){
+        		tuan.alpha=1;
+        		dise.alpha=0.5;
+        	}
+        }
+        dise.on("touchstart", xuanse);
+        function xuanse(){
+        	a=2;
+        	if(a==2){
+        		dise.alpha=1;
+        		tuan.alpha=0.5;
+        	}
+        }
+        
+        var ta=0;
+        //祥云
+        xiangyun.interactive = true;
+        
+        xiangyun.on("touchstart",show1);
+        function show1(){
+         //if(ta==0)
+         //{
+         	var upy = new PIXI.Sprite.fromImage("img/xiangyun.png");
+        	app.stage.addChild(upy);
+        	upy.scale.x=0.035;
+        	upy.scale.y=0.035;
+        	upy.anchor.set(0.5,0.5);
+        	upy.x=540/3;
+            upy.y=1000/3;
+            ta=1;
+            /*if(ta==1){
+            app.stage.removeChild(upy);
+            ta=0;
+        }*/
+          //ta = 1;
+         //}
+        }
+        //仙鹤
+        xianhe.interactive = true;
+        xianhe.on("touchstart",show2);
+        function show2(){
+         //if(ta==1)
+         //{
+         	var uph = new PIXI.Sprite.fromImage("img/xianhe.png");
+        	app.stage.addChild(uph);
+        	uph.scale.x=0.04;
+        	uph.scale.y=0.04;
+        	uph.anchor.set(0.5,0.5);
+        	uph.x=540/3;
+            uph.y=1000/3;
+          //ta =2;
+         //}
+        }
+        //花
+        hua.interactive = true;
+        hua.on("touchstart",show3);
+        function show3(){
+         //if(ta==2)
+         //{
+         	var upf = new PIXI.Sprite.fromImage("img/hua.png");
+        	app.stage.addChild(upf);
+        	upf.scale.x=0.025;
+        	upf.scale.y=0.025;
+        	upf.anchor.set(0.5,0.5);
+        	upf.x=540/3;
+            upf.y=1000/3;
+          // =3;
+         //}
+        }
+        //锦鲤
+        jinli.interactive = true;
+        jinli.on("touchstart",show4);
+        function show4(){
+         //if(ta==3)
+         //{
+         	var upl = new PIXI.Sprite.fromImage("img/jinli.png");
+        	app.stage.addChild(upl);
+        	upl.scale.x=0.03;
+        	upl.scale.y=0.03;
+        	upl.anchor.set(0.5,0.5);
+        	upl.x=540/3;
+            upl.y=1000/3;
+          //ta ==0;
+         //}
+        }
+		
+    </script> 
+</body>
+</html>
